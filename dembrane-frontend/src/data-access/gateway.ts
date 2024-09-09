@@ -10,3 +10,13 @@ export const submitForm = async (answers: { data: any; formId: string }) => {
     answers
   );
 };
+
+export const getFormResponses = async (formId: string) => {
+  return axios.get(
+    `${import.meta.env.VITE_APP_API_URL}/forms/${formId}/responses`
+  );
+};
+
+export const getForms = async () => {
+  return axios.get(`${import.meta.env.VITE_APP_API_URL}/forms`);
+};

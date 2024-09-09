@@ -8,13 +8,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Control, Controller, UseFormRegister } from "react-hook-form";
-export const renderField = (
-  field: FormField,
-  index: number,
-  register: UseFormRegister,
-  control: Control
-) => {
+import {
+  Control,
+  Controller,
+  useFormContext,
+  UseFormRegister,
+} from "react-hook-form";
+export const RenderField = (props: {
+  field: FormField;
+  index: number;
+  register: UseFormRegister;
+  control: Control;
+  setValue: any;
+}) => {
+  // const formContext = useFormContext();
+  const { setValue, index, field, register, control } = props;
+  setValue && setValue(`fields.${index}.type`, field.type);
+  setValue && setValue(`fields.${index}.label`, field.label);
   switch (field.type) {
     case "text":
       return (

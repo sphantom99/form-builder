@@ -2,7 +2,7 @@ import { watch } from "fs";
 import { Trash2Icon } from "lucide-react";
 import React from "react";
 import { Button } from "./button";
-import { renderField } from "@/lib/utilityComps";
+import { RenderField } from "@/lib/utilityComps";
 import { register } from "module";
 
 type TFormRendererProps = {
@@ -16,7 +16,7 @@ type TFormRendererProps = {
   description: string;
 };
 function FormRenderer(props: TFormRendererProps) {
-  const { fields, remove, watch, register, control, mode } = props;
+  const { fields, remove, watch, register, control, mode, setValue } = props;
   const title = props.title ?? watch("title");
   const description = props.description ?? watch("description");
   return (
@@ -28,7 +28,13 @@ function FormRenderer(props: TFormRendererProps) {
       {fields.map((field, index) => (
         <div key={field.id} className="flex items-center space-x-2">
           <div className="flex-grow">
-            {renderField(field, index, register, control)}
+            <RenderField
+              field={field}
+              index={index}
+              register={register}
+              control={control}
+              setValue={setValue}
+            />
           </div>
           {mode === "builder" && (
             <Button

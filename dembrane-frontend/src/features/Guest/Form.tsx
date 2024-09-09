@@ -12,7 +12,7 @@ function Form() {
   if (!formLink) {
     return <div>Form not found</div>;
   }
-  const { register, control, handleSubmit, watch } = useForm();
+  const { register, control, handleSubmit, watch, setValue } = useForm();
   const { data, isLoading } = useQuery({
     queryFn: async () =>
       axios.get(`${import.meta.env.VITE_APP_API_URL}/forms/${formLink}`),
@@ -21,6 +21,7 @@ function Form() {
   const { mutateAsync, isLoading: isLoadingSubmit } = useSubmitForm();
 
   const onSubmit = async (answers) => {
+    console.log(answers);
     mutateAsync({ answers, formId: data.data.uid });
   };
   return (
@@ -39,6 +40,7 @@ function Form() {
             register={register}
             description={data.data.formshapejson.description}
             title={data.data.formshapejson.title}
+            setValue={setValue}
           />
           <Button type="submit">
             {isLoadingSubmit ? "Submitting..." : "Submit"}

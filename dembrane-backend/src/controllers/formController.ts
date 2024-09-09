@@ -89,3 +89,24 @@ exports.getForm = async (req: Request, res: Response) => {
     res.status(500).send("function error");
   }
 };
+
+exports.getFormResponses = async (req: Request, res: Response) => {
+  try {
+    const { formId } = req.params;
+    if (!formId) {
+      return res.status(400).send("uid is required");
+    }
+    const query = `SELECT * FROM form_responses WHERE formuid = $1`;
+    const values = [formId];
+    try {
+      const result = await db.query(query, values);
+      res.json(result.rows);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Internal Server Error");
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("function error");
+  }
+};

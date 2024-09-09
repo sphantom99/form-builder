@@ -16,6 +16,7 @@ app.post("/forms", formController.createForm);
 app.get("/forms", formController.getForms);
 app.get("/forms/:formId", formController.getForm);
 app.delete("/forms/:formId", formController.deleteForm);
+app.get("/forms/:formId/responses", formController.getFormResponses);
 
 app.get("/users/:userId", userController.getUser);
 app.post("/users/:userId/forms", userController.answerForm);

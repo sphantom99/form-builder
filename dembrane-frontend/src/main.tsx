@@ -1,13 +1,14 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
-import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import FormBuilder from "./features/Host/FormBuilder.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SnackbarProvider } from "notistack";
-import FormCreationSuccess from "./features/Host/FormCreationSuccess.tsx";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Form from "./features/Guest/Form.tsx";
+import FormBuilder from "./features/Host/FormBuilder.tsx";
+import FormCreationSuccess from "./features/Host/FormCreationSuccess.tsx";
+import SelectFormForStatistics from "./features/Host/SelectFormForStatistics.tsx";
+import FormStatistics from "./features/Host/Statistics.tsx";
+import "./index.css";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,7 +24,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/form/:formLink",
-    element: <Form />
+    element: <Form />,
+  },
+  {
+    path: "/host/statistics",
+    element: <SelectFormForStatistics />,
+  },
+  {
+    path: "/host/statistics/:formId",
+    element: <FormStatistics />,
   },
 ]);
 
